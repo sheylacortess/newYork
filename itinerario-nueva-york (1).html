@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Web estética y visual con el planning de Nueva York: Manhattan, Brooklyn, Central Park, Coney Island y los mejores atardeceres." />
+  <meta property="og:title" content="Planning Nueva York" />
+  <meta property="og:description" content="Una guía visual y estética para recorrer Nueva York por días." />
+  <meta property="og:image" content="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/eb0db7f4bdab4fafced6a0059744ab61f8103db2.jpg" />
+  <title>Planning Nueva York</title>
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=boska@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+      --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem;
+      --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
+      --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+      --color-bg: #f4efe8;
+      --color-surface: #fbf8f4;
+      --color-surface-2: #f0ebe4;
+      --color-surface-offset: #e7ded4;
+      --color-border: rgba(40,37,29,.12);
+      --color-text: #231f19;
+      --color-text-muted: #6d675f;
+      --color-text-faint: #a29b92;
+      --color-primary: #8a5a44;
+      --color-primary-hover: #6f4634;
+      --color-primary-highlight: #e8d8ce;
+      --color-accent: #21445b;
+      --shadow-sm: 0 2px 10px rgba(35,31,25,.06);
+      --shadow-md: 0 18px 40px rgba(35,31,25,.10);
+      --radius-sm: .4rem; --radius-md: .8rem; --radius-lg: 1.2rem; --radius-xl: 1.6rem; --radius-full: 9999px;
+      --font-display: 'Boska', Georgia, serif;
+      --font-body: 'Satoshi', Inter, sans-serif;
+      --content: 1180px;
+    }
+    [data-theme="dark"] {
+      --color-bg: #141210;
+      --color-surface: #1c1916;
+      --color-surface-2: #24211d;
+      --color-surface-offset: #2f2a25;
+      --color-border: rgba(255,255,255,.10);
+      --color-text: #efe7df;
+      --color-text-muted: #b6aca1;
+      --color-text-faint: #7f766d;
+      --color-primary: #d0a58f;
+      --color-primary-hover: #e0b7a1;
+      --color-primary-highlight: #3b2e27;
+      --color-accent: #84b7d3;
+      --shadow-sm: 0 2px 10px rgba(0,0,0,.18);
+      --shadow-md: 0 18px 40px rgba(0,0,0,.28);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background:
+        radial-gradient(circle at top right, rgba(138,90,68,.08), transparent 28%),
+        linear-gradient(180deg, var(--color-bg), var(--color-surface));
+    }
+    img { display: block; width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; border: 0; background: none; cursor: pointer; }
+    :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: var(--radius-sm); }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    .container { width: min(calc(100% - 2rem), var(--content)); margin: 0 auto; }
+    .skip-link {
+      position: absolute; left: -999px; top: var(--space-3); background: var(--color-text); color: var(--color-bg);
+      padding: var(--space-3) var(--space-4); border-radius: var(--radius-full); z-index: 100;
+    }
+    .skip-link:focus { left: var(--space-3); }
+    .site-header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+      min-height: 4.5rem; padding: 0 var(--space-2);
+    }
+    .brand { display: flex; align-items: center; gap: var(--space-3); }
+    .brand svg { width: 2.2rem; height: 2.2rem; color: var(--color-primary); }
+    .brand-text small { display: block; color: var(--color-text-muted); font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; }
+    .brand-text strong { font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .nav-links a, .theme-toggle {
+      min-height: 44px; display: inline-flex; align-items: center; justify-content: center; padding: 0 var(--space-4);
+      border-radius: var(--radius-full); font-size: var(--text-sm);
+    }
+    .nav-links a:hover, .theme-toggle:hover { background: var(--color-surface-2); }
+    .hero { padding: clamp(var(--space-12), 10vw, var(--space-24)) 0 var(--space-12); }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: var(--space-8); align-items: end;
+    }
+    .eyebrow {
+      display: inline-flex; gap: var(--space-2); align-items: center; padding: .45rem .85rem;
+      border-radius: var(--radius-full); background: var(--color-primary-highlight); color: var(--color-primary);
+      font-size: var(--text-xs); letter-spacing: .14em; text-transform: uppercase;
+    }
+    h1 {
+      margin-top: var(--space-5); font-family: var(--font-display); font-size: var(--text-3xl);
+      line-height: .95; letter-spacing: -.03em; max-width: 10ch;
+    }
+    .hero p {
+      margin-top: var(--space-5); color: var(--color-text-muted); max-width: 58ch;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+    .btn {
+      min-height: 48px; padding: 0 var(--space-5); border-radius: var(--radius-full);
+      display: inline-flex; align-items: center; gap: var(--space-2); border: 1px solid transparent;
+      transition: .18s ease;
+    }
+    .btn-primary { background: var(--color-primary); color: #fff7f2; }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-secondary { border-color: var(--color-border); background: var(--color-surface); }
+    .btn-secondary:hover { background: var(--color-surface-2); }
+    .hero-visual {
+      position: relative; min-height: 620px; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md);
+      background: var(--color-surface-offset);
+    }
+    .hero-visual img { height: 100%; object-fit: cover; }
+    .hero-card {
+      position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4);
+      padding: var(--space-4); border-radius: var(--radius-lg); background: color-mix(in srgb, var(--color-bg) 72%, transparent);
+      backdrop-filter: blur(16px); border: 1px solid var(--color-border);
+    }
+    .hero-card strong { display: block; font-size: var(--text-lg); font-family: var(--font-display); font-weight: 500; }
+    .hero-card span { color: var(--color-text-muted); font-size: var(--text-sm); }
+    .section { padding: clamp(var(--space-10), 7vw, var(--space-20)) 0; }
+    .section-head {
+      display: grid; grid-template-columns: .8fr 1.2fr; gap: var(--space-6); align-items: end; margin-bottom: var(--space-8);
+    }
+    .section-head h2 { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 500; }
+    .section-head p { color: var(--color-text-muted); max-width: 60ch; }
+    .hotel-card, .tips, .day-card { background: var(--color-surface); border: 1px solid var(--color-border); box-shadow: var(--shadow-sm); }
+    .hotel-card {
+      display: grid; grid-template-columns: 1fr auto; gap: var(--space-4); align-items: center;
+      padding: var(--space-5); border-radius: var(--radius-lg);
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: .45rem; padding: .45rem .8rem; border-radius: var(--radius-full);
+      background: var(--color-surface-2); color: var(--color-text-muted); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .12em;
+    }
+    .days-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6);
+    }
+    .day-card { border-radius: var(--radius-xl); overflow: hidden; }
+    .day-cover { aspect-ratio: 16 / 10; position: relative; }
+    .day-cover::after {
+      content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 36%, rgba(0,0,0,.55));
+    }
+    .day-cover img { height: 100%; object-fit: cover; }
+    .day-label {
+      position: absolute; left: var(--space-4); bottom: var(--space-4); z-index: 1; color: white;
+    }
+    .day-label strong { display: block; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; }
+    .day-label span { font-size: var(--text-sm); opacity: .92; }
+    .day-body { padding: var(--space-5); }
+    .timeline { display: grid; gap: var(--space-4); }
+    .moment {
+      padding-left: var(--space-5); border-left: 1px solid var(--color-border); position: relative;
+    }
+    .moment::before {
+      content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--color-primary);
+      position: absolute; left: -5px; top: .55rem;
+    }
+    .moment h3 { font-size: var(--text-sm); text-transform: uppercase; letter-spacing: .12em; color: var(--color-text-muted); margin-bottom: .35rem; }
+    .moment ul { list-style: none; display: grid; gap: .35rem; }
+    .moment li { position: relative; padding-left: 1rem; }
+    .moment li::before { content: "—"; position: absolute; left: 0; color: var(--color-primary); }
+    .feature-band {
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--space-6); align-items: stretch;
+    }
+    .feature-copy, .feature-photo {
+      min-height: 450px; border-radius: var(--radius-xl); overflow: hidden;
+    }
+    .feature-copy {
+      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      border: 1px solid var(--color-border); padding: clamp(var(--space-6), 5vw, var(--space-12)); display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .feature-copy h2 { font-family: var(--font-display); font-size: var(--text-2xl); line-height: 1; font-weight: 500; max-width: 9ch; }
+    .feature-copy p { color: var(--color-text-muted); max-width: 45ch; }
+    .feature-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin-top: var(--space-6); }
+    .feature-stats div { padding-top: var(--space-3); border-top: 1px solid var(--color-border); }
+    .feature-stats strong { display: block; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 500; }
+    .feature-stats span { color: var(--color-text-muted); font-size: var(--text-sm); }
+    .feature-photo img { height: 100%; object-fit: cover; }
+    .tips {
+      border-radius: var(--radius-xl); padding: clamp(var(--space-6), 4vw, var(--space-10));
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-4);
+    }
+    .photo-strip {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4);
+    }
+    .photo-card {
+      position: relative; min-height: 320px; border-radius: var(--radius-xl); overflow: hidden;
+      box-shadow: var(--shadow-sm); background: var(--color-surface-offset);
+    }
+    .photo-card img { height: 100%; object-fit: cover; }
+    .photo-card figcaption {
+      position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4);
+      padding: var(--space-3) var(--space-4); border-radius: var(--radius-lg);
+      background: color-mix(in srgb, var(--color-bg) 72%, transparent); backdrop-filter: blur(12px);
+      border: 1px solid var(--color-border); font-size: var(--text-sm);
+    }
+    .tip { padding: var(--space-4); border-radius: var(--radius-lg); background: var(--color-surface-2); }
+    .tip strong { display: block; margin-bottom: .45rem; }
+    .tip p { color: var(--color-text-muted); font-size: var(--text-sm); }
+    .footer {
+      padding: var(--space-10) 0 var(--space-12); color: var(--color-text-muted);
+    }
+    .footer-card {
+      border-top: 1px solid var(--color-border); padding-top: var(--space-6); display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;
+    }
+    @media (max-width: 980px) {
+      .hero-grid, .section-head, .feature-band, .days-grid, .tips, .photo-strip { grid-template-columns: 1fr; }
+      .hero-visual { min-height: 420px; order: -1; }
+      h1 { max-width: 12ch; }
+      .feature-copy h2 { max-width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .nav { align-items: flex-start; padding-block: var(--space-3); }
+      .nav-links { display: none; }
+      .hotel-card { grid-template-columns: 1fr; }
+      .hero-card { left: var(--space-3); right: var(--space-3); bottom: var(--space-3); }
+      .feature-stats { grid-template-columns: 1fr; }
+      .day-body, .feature-copy, .tips { padding: var(--space-4); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand" aria-label="Planning Nueva York">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Nueva York">
+          <path d="M12 46L28 18L36 32L45 20L52 46" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 46H54" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M24 46V38" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+          <path d="M40 46V35" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+        </svg>
+        <div class="brand-text">
+          <small>City edit</small>
+          <strong>Nueva York</strong>
+        </div>
+      </div>
+      <nav class="nav-links" aria-label="Navegación principal">
+        <a href="#itinerario">Itinerario</a>
+        <a href="#miradores">Miradores</a>
+        <a href="#tips">Consejos</a>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Cambiar tema">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">5 días · Manhattan + Brooklyn</span>
+          <h1>Una ruta estética para vivir Nueva York sin perderte sus mejores atardeceres.</h1>
+          <p>He convertido tu planning en una web visual, elegante y fácil de seguir, con base en el Chelsea Savoy Hotel y un recorrido equilibrado entre iconos, paseos y miradores.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#itinerario">Ver recorrido</a>
+            <a class="btn btn-secondary" href="#tips">Ver consejos</a>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/eb0db7f4bdab4fafced6a0059744ab61f8103db2.jpg" alt="Skyline de Manhattan al atardecer" width="3200" height="1977" loading="eager" decoding="async">
+          <figcaption class="hero-card">
+            <strong>Base del viaje: Chelsea Savoy Hotel</strong>
+            <span>Itinerario pensado para combinar zonas cercanas, paseos con encanto y cierres del día en puntos panorámicos.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="hotel-card">
+          <div>
+            <span class="chip">Hotel base</span>
+            <h2 style="font-family:var(--font-display);font-size:var(--text-xl);font-weight:500;margin-top:.7rem;">Chelsea Savoy Hotel</h2>
+            <p style="color:var(--color-text-muted);margin-top:.35rem;">Un punto práctico para moverte entre Midtown, Downtown y Brooklyn durante todo el viaje.</p>
+          </div>
+          <div class="chip">Ruta urbana · cómoda · visual</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="itinerario">
+      <div class="container">
+        <div class="section-head">
+          <h2>Itinerario por días</h2>
+          <p>Cada jornada está ordenada por momentos del día para que la web funcione como una guía rápida mientras viajas.</p>
+        </div>
+        <div class="days-grid">
+          <article class="day-card">
+            <div class="day-cover">
+              <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6dc36260c7f780f360ace83ec11c484109ab26b3.jpg" alt="Midtown Manhattan al atardecer" width="1024" height="683" loading="lazy">
+              <div class="day-label"><strong>Sábado</strong><span>Midtown Este + Times Square</span></div>
+            </div>
+            <div class="day-body">
+              <div class="timeline">
+                <div class="moment">
+                  <h3>Mañana</h3>
+                  <ul>
+                    <li>Flatiron Building</li>
+                    <li>Madison Square Park</li>
+                    <li>Bryant Park</li>
+                    <li>New York Public Library</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Tarde</h3>
+                  <ul><li>Grand Central Terminal</li></ul>
+                </div>
+                <div class="moment">
+                  <h3>Atardecer</h3>
+                  <ul><li>Summit One Vanderbilt</li></ul>
+                </div>
+                <div class="moment">
+                  <h3>Noche</h3>
+                  <ul><li>Times Square</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-cover">
+              <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/8749e36bd4292c8d8eb4d77cb1e1665a8493ad5d.jpg" alt="Bethesda Fountain en Central Park" width="2048" height="1362" loading="lazy">
+              <div class="day-label"><strong>Domingo</strong><span>Central Park + Upper Side + Midtown</span></div>
+            </div>
+            <div class="day-body">
+              <div class="timeline">
+                <div class="moment">
+                  <h3>Mañana</h3>
+                  <ul>
+                    <li>Central Park: Bethesda Terrace, Bow Bridge, Strawberry Fields</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Media mañana</h3>
+                  <ul><li>Metropolitan Museum of Art o Museo de Historia Natural</li></ul>
+                </div>
+                <div class="moment">
+                  <h3>Tarde</h3>
+                  <ul><li>Paseo por la 5ª Avenida</li></ul>
+                </div>
+                <div class="moment">
+                  <h3>Tarde-noche</h3>
+                  <ul><li>Top of the Rock</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-cover">
+              <img src="https://picsum.photos/seed/coneyislandny/1200/800" alt="Paseo marítimo inspirado en Coney Island" width="1200" height="800" loading="lazy">
+              <div class="day-label"><strong>Lunes</strong><span>Excursión + Coney Island</span></div>
+            </div>
+            <div class="day-body">
+              <div class="timeline">
+                <div class="moment">
+                  <h3>Todo el día</h3>
+                  <ul>
+                    <li>Excursión de contrastes de Nueva York</li>
+                    <li>Tarde en Coney Island</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-cover">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/b/b4/DUMBO_Brooklyn%2C_as_seen_from_the_viewing_gallery_of_One_World_Trade_Center.jpg" alt="Vista de Brooklyn Bridge y DUMBO" width="1280" height="853" loading="lazy">
+              <div class="day-label"><strong>Martes</strong><span>Downtown + Brooklyn</span></div>
+            </div>
+            <div class="day-body">
+              <div class="timeline">
+                <div class="moment">
+                  <h3>Mañana</h3>
+                  <ul>
+                    <li>Estatua de la Libertad</li>
+                    <li>Ellis Island</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Media mañana</h3>
+                  <ul>
+                    <li>Wall Street</li>
+                    <li>Charging Bull</li>
+                    <li>Memorial 9/11</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Mediodía / primeras horas de la tarde</h3>
+                  <ul>
+                    <li>Paseo por Chinatown</li>
+                    <li>Pequeña Italia (Little Italy)</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Comida</h3>
+                  <ul><li>Brookfield Place</li></ul>
+                </div>
+                <div class="moment">
+                  <h3>Tarde</h3>
+                  <ul>
+                    <li>Cruzar el puente de Brooklyn al atardecer</li>
+                    <li>DUMBO</li>
+                    <li>Brooklyn Bridge Park</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="day-card">
+            <div class="day-cover">
+              <img src="https://picsum.photos/seed/highlineny/1200/800" alt="Skyline urbano inspirado en High Line y Hudson Yards" width="1200" height="800" loading="lazy">
+              <div class="day-label"><strong>Miércoles</strong><span>High Line + Midtown</span></div>
+            </div>
+            <div class="day-body">
+              <div class="timeline">
+                <div class="moment">
+                  <h3>Mañana</h3>
+                  <ul>
+                    <li>High Line</li>
+                    <li>Hudson Yards</li>
+                    <li>Vessel</li>
+                  </ul>
+                </div>
+                <div class="moment">
+                  <h3>Atardecer</h3>
+                  <ul><li>Empire State Building</li></ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Postales del recorrido</h2>
+          <p>Le he añadido más fotos para que la web se sienta todavía más inmersiva y cada parte del planning tenga más fuerza visual.</p>
+        </div>
+        <div class="photo-strip">
+          <figure class="photo-card">
+            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/eed8f9488765099242cc0d43bae5513e5813fd66.jpg" alt="Times Square de noche lleno de luces" width="750" height="489" loading="lazy">
+            <figcaption>Times Square para cerrar el sábado con toda la energía de Manhattan.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/5a5c01363eafd76407261ffdf3ca52d1aa0014cd.jpg" alt="Interior de Grand Central Terminal" width="1280" height="857" loading="lazy">
+            <figcaption>Grand Central Terminal aporta ese momento clásico y cinematográfico de Midtown.</figcaption>
+          </figure>
+          <figure class="photo-card">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/High_Line_Park%2C_Section_1a.jpg" alt="High Line con vegetación y edificios de Nueva York" width="1920" height="1328" loading="lazy">
+            <figcaption>High Line y Hudson Yards le dan un aire más moderno al último día.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="miradores">
+      <div class="container feature-band">
+        <div class="feature-copy">
+          <div>
+            <span class="eyebrow">Momentos clave</span>
+            <h2>Los cierres más bonitos del viaje están en altura.</h2>
+            <p>El planning está muy bien montado porque coloca varios miradores y el puente de Brooklyn en franjas de luz especialmente fotogénicas: Summit One Vanderbilt, Top of the Rock, Brooklyn Bridge y Empire State Building.</p>
+          </div>
+          <div class="feature-stats">
+            <div><strong>3</strong><span>Miradores principales</span></div>
+            <div><strong>1</strong><span>Puente al atardecer</span></div>
+            <div><strong>5</strong><span>Días bien repartidos</span></div>
+          </div>
+        </div>
+        <figure class="feature-photo">
+          <img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d961459eca0fd5ef74aeae71683242bee590f6e5.jpg" alt="Vista de DUMBO con el puente y edificios de ladrillo" width="768" height="1024" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="tips">
+      <div class="container">
+        <div class="section-head">
+          <h2>Consejos clave</h2>
+          <p>La parte práctica del plan también está clara: reservar con antelación, moverse en metro y priorizar comodidad para caminar mucho.</p>
+        </div>
+        <div class="tips">
+          <article class="tip">
+            <strong>Reservas</strong>
+            <p>Compra antes las entradas de los miradores para evitar colas y asegurar la franja de atardecer.</p>
+          </article>
+          <article class="tip">
+            <strong>Metro ilimitado</strong>
+            <p>Te compensa para enlazar Manhattan, Brooklyn y Coney Island sin pensar en billetes sueltos.</p>
+          </article>
+          <article class="tip">
+            <strong>Calzado cómodo</strong>
+            <p>Muchos tramos del itinerario se disfrutan caminando, sobre todo parques, avenidas y puentes.</p>
+          </article>
+          <article class="tip">
+            <strong>Atardeceres</strong>
+            <p>Aprovecha la última hora del día en miradores y en el puente para tener mejores vistas y fotos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-card">
+      <p>Diseño editorial con estética urbana, tonos cálidos y navegación simple para consultar el viaje rápido desde móvil o portátil.</p>
+      <p>Hecho a partir de tu planning de Nueva York.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      const setIcon = () => {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+      };
+      root.setAttribute('data-theme', theme);
+      setIcon();
+      toggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        setIcon();
+      });
+    }());
+  </script>
+</body>
+</html>
